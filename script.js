@@ -1,4 +1,57 @@
 const revealElements = document.querySelectorAll(".reveal");
+const menuToggle = document.querySelector("[data-menu-toggle]");
+const mobileMenu = document.querySelector("[data-mobile-menu]");
+const menuCloseTriggers = document.querySelectorAll("[data-menu-close]");
+const menuLinks = document.querySelectorAll("[data-menu-link]");
+
+const closeMobileMenu = () => {
+  if (!menuToggle || !mobileMenu) {
+    return;
+  }
+
+  menuToggle.setAttribute("aria-expanded", "false");
+  mobileMenu.classList.remove("is-open");
+  mobileMenu.hidden = true;
+  document.body.style.overflow = "";
+};
+
+const openMobileMenu = () => {
+  if (!menuToggle || !mobileMenu) {
+    return;
+  }
+
+  menuToggle.setAttribute("aria-expanded", "true");
+  mobileMenu.hidden = false;
+  mobileMenu.classList.add("is-open");
+  document.body.style.overflow = "hidden";
+};
+
+if (menuToggle && mobileMenu) {
+  menuToggle.addEventListener("click", () => {
+    const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+
+    if (isOpen) {
+      closeMobileMenu();
+      return;
+    }
+
+    openMobileMenu();
+  });
+
+  menuCloseTriggers.forEach((trigger) => {
+    trigger.addEventListener("click", closeMobileMenu);
+  });
+
+  menuLinks.forEach((link) => {
+    link.addEventListener("click", closeMobileMenu);
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 720) {
+      closeMobileMenu();
+    }
+  });
+}
 
 if ("IntersectionObserver" in window) {
   const revealObserver = new IntersectionObserver(
@@ -79,6 +132,27 @@ const galleryItems = [
     title: "Esencia para cada rincón",
     description: "Una selección aromática pensada para frescura, calma y bienestar.",
   },
+  {
+    src: "images/dca51a068f12bed4b8661301ff937279.jpg",
+    alt: "Corte moderno con acabado definido",
+    tag: "Nuevo look",
+    title: "Estilo con definición",
+    description: "Un corte con textura limpia, forma precisa y presencia actual.",
+  },
+  {
+    src: "images/91GQQv3C3aL.jpg",
+    alt: "Bolsas aromáticas artesanales sobre una bandeja de mimbre",
+    tag: "Aroma natural",
+    title: "Bolsitas con encanto",
+    description: "Una presentación artesanal pensada para perfumar cajones, armarios y rincones de descanso.",
+  },
+  {
+    src: "images/652d11fd1708e717a45a2c2b1b5445b3.jpg",
+    alt: "Corte de barbería con perfil limpio",
+    tag: "Perfil limpio",
+    title: "Barbería bien ejecutada",
+    description: "Líneas marcadas y acabado profesional en un estilo fresco y cuidado.",
+  },
 ];
 
 const gallerySlots = document.querySelectorAll("[data-gallery-slot]");
@@ -157,6 +231,7 @@ document.addEventListener("keydown", (event) => {
   const slot = document.activeElement?.closest?.("[data-gallery-slot]");
 
   if (event.key === "Escape") {
+    closeMobileMenu();
     closeLightbox();
     return;
   }
@@ -195,6 +270,6 @@ if (gallerySlots.length > 0 && galleryItems.length > gallerySlots.length) {
     window.setInterval(() => {
       offset = (offset + 1) % galleryItems.length;
       renderGallery();
-    }, 5000);
+    }, 3000);
   }
 }

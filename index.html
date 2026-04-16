@@ -22,6 +22,19 @@
           <span>Aroma Barber</span>
         </a>
 
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          aria-label="Abrir menu de navegacion"
+          data-menu-toggle
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
         <nav class="site-nav" aria-label="Principal">
           <a href="#nosotros">Nosotros</a>
           <a href="#servicios">Servicios</a>
@@ -30,6 +43,35 @@
           <a href="#contacto">Contacto</a>
         </nav>
       </header>
+
+      <div class="mobile-menu" id="mobile-menu" hidden data-mobile-menu>
+        <div class="mobile-menu-backdrop" data-menu-close></div>
+        <div class="mobile-menu-panel" role="dialog" aria-modal="true">
+          <div class="mobile-menu-header">
+            <a class="mobile-menu-brand" href="#inicio" data-menu-link>
+              <img src="assets/logo.png" alt="Logo de Aroma Barber" />
+              <span>Aroma Barber</span>
+            </a>
+
+            <button
+              class="mobile-menu-close"
+              type="button"
+              aria-label="Cerrar menu"
+              data-menu-close
+            >
+              ×
+            </button>
+          </div>
+
+          <nav class="mobile-menu-nav" aria-label="Menu movil">
+            <a href="#nosotros" data-menu-link>Nosotros</a>
+            <a href="#servicios" data-menu-link>Servicios</a>
+            <a href="#productos" data-menu-link>Productos</a>
+            <a href="#galeria" data-menu-link>Galería</a>
+            <a href="#contacto" data-menu-link>Contacto</a>
+          </nav>
+        </div>
+      </div>
 
       <main>
         <section class="hero reveal" id="inicio">
