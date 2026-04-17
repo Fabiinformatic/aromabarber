@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fabiinformatic.github.io/aromabarber/sitemap.xml
